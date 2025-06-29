@@ -1,0 +1,35 @@
+
+import { Schema, model } from 'mongoose';
+
+const contactSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        phoneNumber: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        isFavourite: {
+            type: Boolean,
+            default: false,
+        },
+        contactType: {
+            type: String,
+            enum: ['work', 'home', 'persona'],
+            default: 'personal',
+            required: true,
+        },
+    },
+    {
+        timestamps: true,   // додає createdAt і updatedAt
+        versionKey: false,  // не додає __v
+    }
+);
+
+export const ContactsCollection = model('Contact', contactSchema);
